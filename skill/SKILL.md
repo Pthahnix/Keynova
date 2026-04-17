@@ -1,5 +1,5 @@
 ---
-name: projects
+name: keynova
 description: Use when the user wants to create a presentation, slide deck, or talk from existing content such as papers, notes, documentation, or code
 ---
 
