@@ -1,0 +1,13 @@
+/* CJK typography optimization */
+:root {
+  --font-cjk: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-cjk-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+}
+:lang(zh), :lang(ja), :lang(ko) { font-family: var(--font-cjk); }
+:lang(zh) p, :lang(ja) p, :lang(ko) p { line-height: 1.8; }
+:lang(zh) li, :lang(ja) li, :lang(ko) li { line-height: 1.7; }
+:lang(zh) { font-feature-settings: 'halt' 1; }
+:lang(zh) code, :lang(ja) code, :lang(ko) code {
+  font-family: var(--font-mono), var(--font-cjk);
+  margin-inline: 0.15em;
+}

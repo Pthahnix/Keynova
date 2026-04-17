@@ -1,0 +1,7 @@
+/* Grid layout helpers for slide content */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+.grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1.5rem; }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.span-2 { grid-column: span 2; }
+.span-full { grid-column: 1 / -1; }
