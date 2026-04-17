@@ -1,0 +1,10 @@
+/* Side-by-side split layout */
+.split { display: flex; height: 100%; gap: 2rem; align-items: center; }
+.split-left, .split-right { flex: 1; padding: 1rem; }
+.split-left { border-right: 1px solid rgba(255,255,255,0.1); }
+.split-40-60 .split-left { flex: 0.4; }
+.split-40-60 .split-right { flex: 0.6; }
+.split-60-40 .split-left { flex: 0.6; }
+.split-60-40 .split-right { flex: 0.4; }
+.split-30-70 .split-left { flex: 0.3; }
+.split-30-70 .split-right { flex: 0.7; }

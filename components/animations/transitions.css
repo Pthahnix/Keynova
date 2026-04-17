@@ -1,0 +1,38 @@
+/* Page transition classes */
+/* Usage: add data-transition="fade|slide|flip|zoom" to .slide elements */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fade (default) */
+.slide[data-transition="fade"] { transition: opacity 0.6s ease; }
+
+/* Slide from right */
+.slide[data-transition="slide"] { transform: translateX(100%); }
+.slide[data-transition="slide"].active { transform: translateX(0); }
+.slide[data-transition="slide"].slide-exit { transform: translateX(-100%); }
+
+/* Flip */
+.slide[data-transition="flip"] {
+  transform: perspective(1000px) rotateY(90deg);
+  backface-visibility: hidden;
+}
+.slide[data-transition="flip"].active { transform: perspective(1000px) rotateY(0); }
+
+/* Zoom */
+.slide[data-transition="zoom"] { transform: scale(0.8); }
+.slide[data-transition="zoom"].active { transform: scale(1); }
+.slide[data-transition="zoom"].slide-exit { transform: scale(1.2); opacity: 0; }
+
+/* Rise from bottom */
+.slide[data-transition="rise"] { transform: translateY(30px); }
+.slide[data-transition="rise"].active { transform: translateY(0); }
