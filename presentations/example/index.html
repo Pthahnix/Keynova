@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keynova Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      --bg: #0a0a0f;
+      --text: #e8e8e8;
+      --accent: #4a9eff;
+      --accent-soft: rgba(74,158,255,0.15);
+    }
+    html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font-sans); }
+    .slide-container { position: relative; width: 100vw; height: 100vh; }
+    .slide {
+      position: absolute; inset: 0; padding: 4rem 6rem;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.5s ease;
+    }
+    .slide.active { opacity: 1; visibility: visible; }
+    h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.1; }
+    h2 { font-size: clamp(1.2rem, 3vw, 2rem); margin-bottom: 1rem; opacity: 0.8; }
+    p, li { font-size: clamp(1rem, 1.8vw, 1.3rem); line-height: 1.7; }
+    ul { list-style: none; padding: 0; }
+    ul li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; }
+    ul li::before { content: ''; position: absolute; left: 0; top: 50%; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; transform: translateY(-50%); }
+    code, pre { font-family: var(--font-mono); }
+    pre { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9em; line-height: 1.6; }
+    code { font-size: 0.85em; padding: 0.15em 0.4em; background: rgba(255,255,255,0.1); border-radius: 3px; }
+    pre code { padding: 0; background: none; }
+    .centered { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .centered h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+    .centered p { font-size: clamp(1rem, 2vw, 1.5rem); max-width: 40ch; opacity: 0.6; margin-top: 1rem; }
+    .split { display: flex; gap: 3rem; align-items: center; height: 100%; }
+    .split > * { flex: 1; }
+    .split ol { padding-left: 1.5rem; }
+    .split ol li { padding: 0.5rem 0; }
+    .anim-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .slide.active .anim-up { opacity: 1; transform: translateY(0); }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .css-chart { display: flex; flex-direction: column; gap: 16px; padding: 1rem 0; max-width: 600px; }
+    .css-bar { position: relative; height: 40px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; }
+    .css-bar::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: var(--value, 0%); background: linear-gradient(90deg, var(--accent), #51cf66); border-radius: 6px; transition: width 1.2s ease; }
+    .css-bar::after { content: attr(data-label) ' \2014  ' attr(data-value); position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: #fff; z-index: 1; white-space: nowrap; }
+    .slide:not(.active) .css-bar::before { width: 0; }
+    #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.3s; z-index: 9999; }
+    .flow { display: flex; align-items: center; gap: 1rem; font-size: 1.1rem; flex-wrap: wrap; justify-content: center; }
+    .flow-step { background: var(--accent-soft); border: 1px solid var(--accent); padding: 0.8rem 1.2rem; border-radius: 8px; }
+    .flow-arrow { font-size: 1.5rem; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <div class="slide-container">
+    <div class="slide centered">
+      <h1>Keynova</h1>
+      <p>Markdown in. Beautiful presentations out.</p>
+    </div>
+    <div class="slide">
+      <h1>What is Keynova?</h1>
+      <p style="margin-bottom:1.5rem;">Keynova turns your Markdown into beautiful HTML presentations.</p>
+      <ul>
+        <li class="anim-up stagger-1">No frameworks</li>
+        <li class="anim-up stagger-2">No build tools</li>
+        <li class="anim-up stagger-3">Just write and present</li>
+      </ul>
+    </div>
+    <div class="slide">
+      <h1>How It Works</h1>
+      <div class="split">
+        <div>
+          <ol>
+            <li class="anim-up stagger-1">Write Markdown</li>
+            <li class="anim-up stagger-2">Claude Code generates HTML</li>
+            <li class="anim-up stagger-3">Preview with dev server</li>
+            <li class="anim-up stagger-4">Present or deploy</li>
+          </ol>
+        </div>
+        <div class="anim-up stagger-2">
+          <div class="flow">
+            <span class="flow-step">.md file</span>
+            <span class="flow-arrow">&#x2192;</span>
+            <span class="flow-step">Claude Code</span>
+            <span class="flow-arrow">&#x2192;</span>
+            <span class="flow-step">index.html</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <h1>Code Example</h1>
+      <pre data-animate="lines"><code class="language-javascript">function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('Keynova'));</code></pre>
+    </div>
+    <div class="slide">
+      <h1>Performance Comparison</h1>
+      <p style="margin-bottom:1.5rem;">Dependencies required by each tool:</p>
+      <div class="css-chart">
+        <div class="css-bar" style="--value:100%;" data-label="PowerPoint" data-value="500MB install"></div>
+        <div class="css-bar" style="--value:10%;" data-label="Reveal.js" data-value="50MB node_modules"></div>
+        <div class="css-bar" style="--value:0.5%;" data-label="Keynova" data-value="0MB dependencies"></div>
+      </div>
+    </div>
+    <div class="slide centered">
+      <h1 class="anim-up">Thank You</h1>
+      <p class="anim-up stagger-2">Questions? Open an issue on GitHub.</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script>
+    (function() {
+      var slides = document.querySelectorAll('.slide');
+      var current = 0;
+      function showSlide(index) {
+        slides.forEach(function(s, i) {
+          s.classList.toggle('active', i === index);
+          s.setAttribute('aria-hidden', i !== index);
+        });
+        current = index;
+        window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: current, total: slides.length } }));
+      }
+      document.addEventListener('keydown', function(e) {
+        switch (e.key) {
+          case 'ArrowRight': case 'ArrowDown': case ' ':
+            e.preventDefault();
+            if (current < slides.length - 1) showSlide(current + 1);
+            break;
+          case 'ArrowLeft': case 'ArrowUp':
+            e.preventDefault();
+            if (current > 0) showSlide(current - 1);
+            break;
+        }
+      });
+      var startX = 0;
+      document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      document.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 50) {
+          if (dx < 0 && current < slides.length - 1) showSlide(current + 1);
+          if (dx > 0 && current > 0) showSlide(current - 1);
+        }
+      }, { passive: true });
+      var bar = document.getElementById('progress-bar');
+      window.addEventListener('slidechange', function(e) {
+        var d = e.detail;
+        if (bar) bar.style.width = ((d.index + 1) / d.total * 100) + '%';
+      });
+      document.querySelectorAll('pre[data-animate="lines"]').forEach(function(pre) {
+        var code = pre.querySelector('code');
+        if (!code) return;
+        var lines = code.innerHTML.split('\n');
+        code.innerHTML = lines.map(function(line, i) {
+          return '<span class="code-line" style="opacity:0;display:block;transition:opacity 0.3s ease ' + (i * 120) + 'ms">' + line + '</span>';
+        }).join('');
+        var slide = pre.closest('.slide');
+        window.addEventListener('slidechange', function() {
+          var show = slide.classList.contains('active');
+          code.querySelectorAll('.code-line').forEach(function(el) { el.style.opacity = show ? '1' : '0'; });
+        });
+      });
+      showSlide(0);
+      Prism.highlightAll();
+    })();
+  </script>
+</body>
+</html>
