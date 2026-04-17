@@ -1,0 +1,8 @@
+/* Image-text mixed layouts */
+.img-text { display: flex; align-items: center; gap: 2rem; height: 100%; }
+.img-text img { max-width: 50%; max-height: 80%; object-fit: contain; border-radius: 8px; }
+.img-text-content { flex: 1; }
+.img-text-reverse { flex-direction: row-reverse; }
+.img-bg { background-size: cover; background-position: center; position: relative; }
+.img-bg::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+.img-bg > * { position: relative; z-index: 1; }
