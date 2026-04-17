@@ -1,8 +1,0 @@
-/* Monospace font configuration */
-:root {
-  --font-mono: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Source Code Pro', 'Consolas', monospace;
-}
-code, pre, kbd, samp { font-family: var(--font-mono); }
-pre { font-size: 0.9em; line-height: 1.6; tab-size: 2; }
-code { font-size: 0.85em; padding: 0.15em 0.4em; background: rgba(255,255,255,0.1); border-radius: 3px; }
-pre code { padding: 0; background: none; font-size: inherit; }
